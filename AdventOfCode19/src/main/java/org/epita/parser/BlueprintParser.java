@@ -29,29 +29,29 @@ public class BlueprintParser {
                 throw new IllegalArgumentException("Invalid line: " + line);
             }
 
-            List<Recipe> recipes = List.of(
-                    new Recipe(List.of(
-                            new Ingredient(numbers.get(1), ResourceType.ORE)
+            List<RobotProductionCost> robotProductionCosts = List.of(
+                    new RobotProductionCost(List.of(
+                            new Material(numbers.get(1), ResourceType.ORE)
                     )),
-                    new Recipe(List.of(
-                            new Ingredient(numbers.get(2), ResourceType.ORE)
+                    new RobotProductionCost(List.of(
+                            new Material(numbers.get(2), ResourceType.ORE)
                     )),
-                    new Recipe(List.of(
-                            new Ingredient(numbers.get(3), ResourceType.ORE),
-                            new Ingredient(numbers.get(4), ResourceType.CLAY)
+                    new RobotProductionCost(List.of(
+                            new Material(numbers.get(3), ResourceType.ORE),
+                            new Material(numbers.get(4), ResourceType.CLAY)
                     )),
-                    new Recipe(List.of(
-                            new Ingredient(numbers.get(5), ResourceType.ORE),
-                            new Ingredient(numbers.get(6), ResourceType.OBSIDIAN)
+                    new RobotProductionCost(List.of(
+                            new Material(numbers.get(5), ResourceType.ORE),
+                            new Material(numbers.get(6), ResourceType.OBSIDIAN)
                     )),
-                    new Recipe(List.of(
-                            new Ingredient(numbers.get(7), ResourceType.GEODE),
-                            new Ingredient(numbers.get(8), ResourceType.CLAY),
-                            new Ingredient(numbers.get(9), ResourceType.OBSIDIAN)
+                    new RobotProductionCost(List.of(
+                            new Material(numbers.get(7), ResourceType.GEODE),
+                            new Material(numbers.get(8), ResourceType.CLAY),
+                            new Material(numbers.get(9), ResourceType.OBSIDIAN)
                     ))
             );
 
-            blueprints.add(new Blueprint(recipes));
+            blueprints.add(new Blueprint(robotProductionCosts));
         }
 
         return blueprints;

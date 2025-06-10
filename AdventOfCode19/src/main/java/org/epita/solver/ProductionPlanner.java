@@ -27,12 +27,12 @@ public class ProductionPlanner {
         int best = res[getLastResourceType()] + bots[getLastResourceType()] * time;
 
         for (int robotType = 0; robotType < bp.size(); robotType++) {
-            Recipe recipe = bp.getRecipeFor(robotType);
+            RobotProductionCost robotProductionCost = bp.getRecipeFor(robotType);
             if (robotType != getLastResourceType() && bots[robotType] >= maxSpend[robotType]) {
                 continue;
             }
 
-            int waitTime = computeWaitTime(recipe, bots, res);
+            int waitTime = computeWaitTime(robotProductionCost, bots, res);
             if (waitTime < 0 || time - waitTime - 1 <= 0) {
                 continue;
             }
@@ -40,7 +40,7 @@ public class ProductionPlanner {
             int newTime = time - waitTime - 1;
             int[] newBots = bots.clone();
             int[] newRes = accumulateResources(bots, res, waitTime + 1);
-            newRes = Utils.spendResources(newRes, recipe);
+            newRes = Utils.spendResources(newRes, robotProductionCost);
             newBots[robotType]++;
 
             for (int i = 0; i < numberOfResources - 1; i++) {

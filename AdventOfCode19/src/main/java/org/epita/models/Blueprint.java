@@ -2,13 +2,13 @@ package org.epita.models;
 
 import java.util.List;
 
-public record Blueprint(List<Recipe> recipes) {
+public record Blueprint(List<RobotProductionCost> robotProductionCosts) {
 
-    public Recipe getRecipeFor(int robotType) {
-        return recipes.get(robotType);
+    public RobotProductionCost getRecipeFor(int robotType) {
+        return robotProductionCosts.get(robotType);
     }
 
     public int size() {
-        return recipes.size();
+        return robotProductionCosts.size();
     }
 }

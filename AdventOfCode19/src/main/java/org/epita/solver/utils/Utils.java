@@ -1,24 +1,24 @@
 package org.epita.solver.utils;
 
 import org.epita.models.Blueprint;
-import org.epita.models.Ingredient;
-import org.epita.models.Recipe;
+import org.epita.models.Material;
+import org.epita.models.RobotProductionCost;
 
 import static org.epita.Main.numberOfResources;
 
 public class Utils {
-    public static int[] spendResources(int[] res, Recipe recipe) {
+    public static int[] spendResources(int[] res, RobotProductionCost robotProductionCost) {
         int[] newRes = res.clone();
-        for (Ingredient ingredient : recipe.ingredients()) {
-            newRes[ingredient.resourceType()] -= ingredient.amount();
+        for (Material material : robotProductionCost.materials()) {
+            newRes[material.resourceType()] -= material.amount();
         }
         return newRes;
     }
 
     public static int[] computeMaxSpend(Blueprint blueprint) {
         int[] maxSpend = new int[numberOfResources];
-        for (Recipe recipe : blueprint.recipes()) {
-            for (Ingredient req : recipe.ingredients()) {
+        for (RobotProductionCost robotProductionCost : blueprint.robotProductionCosts()) {
+            for (Material req : robotProductionCost.materials()) {
                 int amount = req.amount();
                 int resourceType = req.resourceType();
                 if (resourceType < numberOfResources - 1 && amount > maxSpend[resourceType]) {
@@ -29,9 +29,9 @@ public class Utils {
         return maxSpend;
     }
 
-    public static int computeWaitTime(Recipe recipe, int[] bots, int[] res) {
+    public static int computeWaitTime(RobotProductionCost robotProductionCost, int[] bots, int[] res) {
         int maxWait = 0;
-        for (Ingredient req : recipe.ingredients()) {
+        for (Material req : robotProductionCost.materials()) {
             int amount = req.amount();
             int resType = req.resourceType();
             if (bots[resType] == 0) return -1;
