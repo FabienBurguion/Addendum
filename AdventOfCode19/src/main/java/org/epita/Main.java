@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class Main {
+    public static int numberOfResources = 5;
+
     public static void main(String[] args) {
         try {
             List<Blueprint> blueprints = BlueprintParser.parseInput();

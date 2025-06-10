@@ -4,6 +4,8 @@ import org.epita.models.Blueprint;
 import org.epita.models.Ingredient;
 import org.epita.models.Recipe;
 
+import static org.epita.Main.numberOfResources;
+
 public class GameUtils {
     public static int minimum(int a, int b) {
         return Math.min(a, b);
@@ -18,12 +20,12 @@ public class GameUtils {
     }
 
     public static int[] computeMaxSpend(Blueprint blueprint) {
-        int[] maxSpend = new int[5];
+        int[] maxSpend = new int[numberOfResources];
         for (Recipe recipe : blueprint.recipes()) {
             for (Ingredient req : recipe.ingredients()) {
                 int amount = req.amount();
                 int resourceType = req.resourceType();
-                if (resourceType < 4 && amount > maxSpend[resourceType]) {
+                if (resourceType < numberOfResources - 1 && amount > maxSpend[resourceType]) {
                     maxSpend[resourceType] = amount;
                 }
             }

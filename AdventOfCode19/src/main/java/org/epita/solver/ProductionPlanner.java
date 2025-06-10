@@ -6,12 +6,15 @@ import org.epita.solver.utils.GameUtils;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.epita.Main.numberOfResources;
+import static org.epita.models.ResourceType.getLastResourceType;
+
 public class ProductionPlanner {
     private final Map<CacheKey, Integer> cache = new HashMap<>();
 
     public int planProduction(Blueprint bp, int[] maxSpend, int time, int[] bots, int[] res) {
         if (time == 0) {
-            return res[ResourceType.DIAMOND];
+            return res[getLastResourceType()];
         }
 
         CacheKey key = new CacheKey(time, bots, res);
@@ -19,11 +22,11 @@ public class ProductionPlanner {
             return cache.get(key);
         }
 
-        int best = res[ResourceType.DIAMOND] + bots[ResourceType.DIAMOND] * time;
+        int best = res[getLastResourceType()] + bots[getLastResourceType()] * time;
 
         for (int robotType = 0; robotType < bp.size(); robotType++) {
             Recipe recipe = bp.getRecipeFor(robotType);
-            if (robotType != ResourceType.DIAMOND && bots[robotType] >= maxSpend[robotType]) {
+            if (robotType != getLastResourceType() && bots[robotType] >= maxSpend[robotType]) {
                 continue;
             }
 
@@ -38,7 +41,7 @@ public class ProductionPlanner {
             newRes = GameUtils.spendResources(newRes, recipe);
             newBots[robotType]++;
 
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < numberOfResources - 1; i++) {
                 newRes[i] = GameUtils.minimum(newRes[i], maxSpend[i] * newTime);
             }
 
@@ -67,7 +70,7 @@ public class ProductionPlanner {
 
     private int[] accumulateResources(int[] bots, int[] res, int duration) {
         int[] newRes = res.clone();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < numberOfResources; i++) {
             newRes[i] += bots[i] * duration;
         }
         return newRes;
