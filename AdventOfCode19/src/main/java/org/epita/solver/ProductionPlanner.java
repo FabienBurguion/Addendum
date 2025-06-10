@@ -42,7 +42,7 @@ public class ProductionPlanner {
             newBots[robotType]++;
 
             for (int i = 0; i < numberOfResources - 1; i++) {
-                newRes[i] = GameUtils.minimum(newRes[i], maxSpend[i] * newTime);
+                newRes[i] = Math.min(newRes[i], maxSpend[i] * newTime);
             }
 
             int result = planProduction(bp, maxSpend, newTime, newBots, newRes);

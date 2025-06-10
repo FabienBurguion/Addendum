@@ -7,10 +7,6 @@ import org.epita.models.Recipe;
 import static org.epita.Main.numberOfResources;
 
 public class GameUtils {
-    public static int minimum(int a, int b) {
-        return Math.min(a, b);
-    }
-
     public static int[] spendResources(int[] res, Recipe recipe) {
         int[] newRes = res.clone();
         for (Ingredient ingredient : recipe.ingredients()) {
