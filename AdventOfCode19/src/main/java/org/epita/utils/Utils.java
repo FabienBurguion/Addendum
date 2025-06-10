@@ -1,4 +1,4 @@
-package org.epita.solver.utils;
+package org.epita.utils;
 
 import org.epita.models.Blueprint;
 import org.epita.models.Material;
@@ -50,5 +50,19 @@ public class Utils {
             newRes[i] += bots[i] * duration;
         }
         return newRes;
+    }
+
+    public static int findIndexOfMax(int[] array) {
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Le tableau est vide ou null");
+        }
+
+        int maxIndex = 0;
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > array[maxIndex]) {
+                maxIndex = i;
+            }
+        }
+        return maxIndex;
     }
 }

@@ -1,15 +1,15 @@
 package org.epita.solver;
 
 import org.epita.models.*;
-import org.epita.solver.utils.Utils;
+import org.epita.utils.Utils;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.epita.Main.numberODifferentResources;
 import static org.epita.models.ResourceType.getLastResourceType;
-import static org.epita.solver.utils.Utils.accumulateResources;
-import static org.epita.solver.utils.Utils.computeWaitTime;
+import static org.epita.utils.Utils.accumulateResources;
+import static org.epita.utils.Utils.computeWaitTime;
 
 public class ProductionPlanner {
     private final Map<CacheKey, Integer> cache = new HashMap<>();

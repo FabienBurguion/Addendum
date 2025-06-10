@@ -2,13 +2,16 @@ package org.epita.solver;
 
 import lombok.AllArgsConstructor;
 import org.epita.models.Blueprint;
+import org.epita.output.BlueprintOutput;
+import org.yaml.snakeyaml.util.Tuple;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.IntBinaryOperator;
 
 import static org.epita.Main.numberODifferentResources;
-import static org.epita.solver.utils.Utils.computeMaxSpend;
+import static org.epita.utils.Utils.computeMaxSpend;
 
 @AllArgsConstructor
 public class Solver {
@@ -19,8 +22,9 @@ public class Solver {
     private final int initialTotal;
     private final IntBinaryOperator aggregateFn;
 
-    public int run() {
+    public Tuple<int[], Integer> run() throws IOException {
         int total = initialTotal;
+        int[] values = new int[blueprints.size()];
         for (int i = 0; i < Math.min(count, blueprints.size()); i++) {
             Blueprint blueprint = blueprints.get(i);
             int[] maxSpend = computeMaxSpend(blueprint);
@@ -32,10 +36,12 @@ public class Solver {
             ProductionPlanner planner = new ProductionPlanner();
             int diamonds = planner.planProduction(blueprint, maxSpend, limit, initialBots, initialResources);
             System.out.printf("Blueprint %d → %d diamonds%n", i + 1, diamonds);
+            values[i] = diamonds;
 
             int score = scoreFn.apply(i, diamonds);
             total = aggregateFn.applyAsInt(total, score);
         }
-        return total;
+        BlueprintOutput.writeOutput(values);
+        return new Tuple<>(values, total);
     }
 }

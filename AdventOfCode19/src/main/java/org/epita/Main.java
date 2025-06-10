@@ -1,16 +1,15 @@
 package org.epita;
 
-import org.epita.models.Blueprint;
-import org.epita.parser.BlueprintParser;
-import org.epita.solver.Solver;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.io.IOException;
-import java.util.List;
-
+@SpringBootApplication
 public class Main {
     public static int numberODifferentResources = 5;
 
     public static void main(String[] args) {
+        SpringApplication.run(Main.class, args);
+        /*
         try {
             List<Blueprint> blueprints = BlueprintParser.parseInput();
 
@@ -24,7 +23,7 @@ public class Main {
             );
             System.out.println("Total score part 1: " + solverPart1.run());
 
-            /*
+
             Solver solverPart2 = new Solver(
                     blueprints,
                     32,
@@ -34,10 +33,11 @@ public class Main {
                     (a, b) -> a * b
             );
             System.out.println("Total score part 2: " + solverPart2.run());
-             */
+
 
         } catch (IOException e) {
             System.err.println("Erreur de lecture du fichier : " + e.getMessage());
         }
+         */
     }
 }
