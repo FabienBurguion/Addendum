@@ -22,8 +22,7 @@ public class Main {
                     0,
                     Integer::sum
             );
-            int part1 = solverPart1.run();
-            System.out.println("Total score part 1: " + part1);
+            System.out.println("Total score part 1: " + solverPart1.run());
 
             /*
             Solver solverPart2 = new Solver(
@@ -34,8 +33,7 @@ public class Main {
                     1,
                     (a, b) -> a * b
             );
-            int part2 = solverPart2.run();
-            System.out.println("Total score part 2: " + part2);
+            System.out.println("Total score part 2: " + solverPart2.run());
              */
 
         } catch (IOException e) {
