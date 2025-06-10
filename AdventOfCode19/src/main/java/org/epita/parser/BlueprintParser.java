@@ -25,7 +25,7 @@ public class BlueprintParser {
                 numbers.add(Integer.parseInt(matcher.group()));
             }
 
-            if (numbers.size() < 7) {
+            if (numbers.size() < 10) {
                 throw new IllegalArgumentException("Invalid line: " + line);
             }
 
