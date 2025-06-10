@@ -2,7 +2,7 @@ package org.epita.solver;
 
 import lombok.AllArgsConstructor;
 import org.epita.models.Blueprint;
-import org.epita.output.BlueprintOutput;
+import org.epita.service.io.BlueprintOutput;
 import org.yaml.snakeyaml.util.Tuple;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package org.epita.output;
+package org.epita.service.io;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

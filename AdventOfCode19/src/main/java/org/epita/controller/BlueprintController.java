@@ -3,7 +3,7 @@ package org.epita.controller;
 import org.epita.controller.dto.BlueprintDto;
 import org.epita.controller.dto.BlueprintOutput;
 import org.epita.models.Blueprint;
-import org.epita.parser.BlueprintParser;
+import org.epita.service.BlueprintService;
 import org.epita.solver.Solver;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,11 +19,17 @@ import static org.epita.utils.Utils.findIndexOfMax;
 @RequestMapping("/blueprints")
 public class BlueprintController {
 
+    private final BlueprintService blueprintService;
+
+    public BlueprintController(BlueprintService blueprintService) {
+        this.blueprintService = blueprintService;
+    }
+
     @GetMapping
     @RequestMapping("/analyze")
     public ResponseEntity<BlueprintDto> analyseBlueprint() {
         try {
-            List<Blueprint> blueprints = BlueprintParser.parseInput();
+            List<Blueprint> blueprints = blueprintService.getBlueprints();
             Solver solver = new Solver(
                     blueprints,
                     24,
@@ -48,7 +54,7 @@ public class BlueprintController {
 
             return ResponseEntity.ok(blueprintDto);
         } catch (IOException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.internalServerError().build();
         }
     }
 }
