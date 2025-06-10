@@ -28,10 +28,10 @@ public class Solver {
             int[] initialResources = {0, 0, 0, 0, 0};
 
             ProductionPlanner planner = new ProductionPlanner();
-            int geodes = planner.planProduction(blueprint, maxSpend, limit, initialBots, initialResources);
-            System.out.printf("Blueprint %d → %d geodes%n", i + 1, geodes);
+            int diamonds = planner.planProduction(blueprint, maxSpend, limit, initialBots, initialResources);
+            System.out.printf("Blueprint %d → %d diamonds%n", i + 1, diamonds);
 
-            int score = scoreFn.apply(i, geodes);
+            int score = scoreFn.apply(i, diamonds);
             total = aggregateFn.applyAsInt(total, score);
         }
         return total;

@@ -67,7 +67,7 @@ public class ProductionPlanner {
 
     private int[] accumulateResources(int[] bots, int[] res, int duration) {
         int[] newRes = res.clone();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             newRes[i] += bots[i] * duration;
         }
         return newRes;

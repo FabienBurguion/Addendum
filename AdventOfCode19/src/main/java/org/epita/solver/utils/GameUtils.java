@@ -18,12 +18,12 @@ public class GameUtils {
     }
 
     public static int[] computeMaxSpend(Blueprint blueprint) {
-        int[] maxSpend = new int[4];
+        int[] maxSpend = new int[5];
         for (Recipe recipe : blueprint.recipes()) {
             for (Ingredient req : recipe.ingredients()) {
                 int amount = req.amount();
                 int resourceType = req.resourceType();
-                if (resourceType < 3 && amount > maxSpend[resourceType]) {
+                if (resourceType < 4 && amount > maxSpend[resourceType]) {
                     maxSpend[resourceType] = amount;
                 }
             }
