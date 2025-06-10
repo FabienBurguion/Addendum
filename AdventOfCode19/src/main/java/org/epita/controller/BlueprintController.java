@@ -37,6 +37,8 @@ public class BlueprintController {
             int[] values = result._1();
             int total = result._2();
 
+            System.out.println("Total: " + total);
+
             int bestBlueprintIndex = findIndexOfMax(values) + 1;
             List<BlueprintOutput> blueprintsRes = new ArrayList<>();
             for (int i = 0; i < values.length; i++) {
