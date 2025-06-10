@@ -1,8 +1,9 @@
+package org.epita.solver;
+
 import org.epita.models.Blueprint;
 import org.epita.models.Material;
 import org.epita.models.ResourceType;
 import org.epita.models.RobotProductionCost;
-import org.epita.solver.Solver;
 import org.junit.jupiter.api.Test;
 import org.yaml.snakeyaml.util.Tuple;
 

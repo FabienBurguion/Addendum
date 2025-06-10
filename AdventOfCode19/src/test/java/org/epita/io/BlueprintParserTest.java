@@ -1,3 +1,5 @@
+package org.epita.io;
+
 import org.epita.models.Blueprint;
 import org.epita.models.ResourceType;
 import org.epita.models.RobotProductionCost;

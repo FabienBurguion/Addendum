@@ -1,3 +1,5 @@
+package org.epita.io;
+
 import org.epita.service.io.BlueprintOutput;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
