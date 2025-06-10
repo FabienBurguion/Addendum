@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class Main {
-    public static int numberOfResources = 5;
+    public static int numberODifferentResources = 5;
 
     public static void main(String[] args) {
         try {

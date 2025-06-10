@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.IntBinaryOperator;
 
-import static org.epita.Main.numberOfResources;
+import static org.epita.Main.numberODifferentResources;
 import static org.epita.solver.utils.Utils.computeMaxSpend;
 
 @AllArgsConstructor
@@ -25,8 +25,8 @@ public class Solver {
             Blueprint blueprint = blueprints.get(i);
             int[] maxSpend = computeMaxSpend(blueprint);
 
-            int[] initialBots = new int[numberOfResources];
-            int[] initialResources = new int[numberOfResources];
+            int[] initialBots = new int[numberODifferentResources];
+            int[] initialResources = new int[numberODifferentResources];
             initialBots[0] = 1;
 
             ProductionPlanner planner = new ProductionPlanner();

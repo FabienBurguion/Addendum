@@ -6,7 +6,7 @@ import org.epita.solver.utils.Utils;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.epita.Main.numberOfResources;
+import static org.epita.Main.numberODifferentResources;
 import static org.epita.models.ResourceType.getLastResourceType;
 import static org.epita.solver.utils.Utils.accumulateResources;
 import static org.epita.solver.utils.Utils.computeWaitTime;
@@ -43,7 +43,7 @@ public class ProductionPlanner {
             newRes = Utils.spendResources(newRes, robotProductionCost);
             newBots[robotType]++;
 
-            for (int i = 0; i < numberOfResources - 1; i++) {
+            for (int i = 0; i < numberODifferentResources - 1; i++) {
                 newRes[i] = Math.min(newRes[i], maxSpend[i] * newTime);
             }
 

@@ -4,7 +4,7 @@ import org.epita.models.Blueprint;
 import org.epita.models.Material;
 import org.epita.models.RobotProductionCost;
 
-import static org.epita.Main.numberOfResources;
+import static org.epita.Main.numberODifferentResources;
 
 public class Utils {
     public static int[] spendResources(int[] res, RobotProductionCost robotProductionCost) {
@@ -16,12 +16,12 @@ public class Utils {
     }
 
     public static int[] computeMaxSpend(Blueprint blueprint) {
-        int[] maxSpend = new int[numberOfResources];
+        int[] maxSpend = new int[numberODifferentResources];
         for (RobotProductionCost robotProductionCost : blueprint.robotProductionCosts()) {
             for (Material req : robotProductionCost.materials()) {
                 int amount = req.amount();
                 int resourceType = req.resourceType();
-                if (resourceType < numberOfResources - 1 && amount > maxSpend[resourceType]) {
+                if (resourceType < numberODifferentResources - 1 && amount > maxSpend[resourceType]) {
                     maxSpend[resourceType] = amount;
                 }
             }
@@ -46,7 +46,7 @@ public class Utils {
 
     public static int[] accumulateResources(int[] bots, int[] res, int duration) {
         int[] newRes = res.clone();
-        for (int i = 0; i < numberOfResources; i++) {
+        for (int i = 0; i < numberODifferentResources; i++) {
             newRes[i] += bots[i] * duration;
         }
         return newRes;
