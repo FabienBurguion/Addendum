@@ -59,9 +59,7 @@ class SolverTest {
                 )
         ));
 
-        List<Blueprint> blueprints = List.of(blueprint1, blueprint2);
-
-        Tuple<int[], Integer> result = getIntegerTuple(blueprints);
+        Tuple<int[], Integer> result = getIntegerTuple(List.of(blueprint1, blueprint2));
 
         int[] values = result._1();
         int total = result._2();
