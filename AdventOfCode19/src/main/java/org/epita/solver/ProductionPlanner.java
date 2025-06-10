@@ -1,13 +1,15 @@
 package org.epita.solver;
 
 import org.epita.models.*;
-import org.epita.solver.utils.GameUtils;
+import org.epita.solver.utils.Utils;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.epita.Main.numberOfResources;
 import static org.epita.models.ResourceType.getLastResourceType;
+import static org.epita.solver.utils.Utils.accumulateResources;
+import static org.epita.solver.utils.Utils.computeWaitTime;
 
 public class ProductionPlanner {
     private final Map<CacheKey, Integer> cache = new HashMap<>();
@@ -38,7 +40,7 @@ public class ProductionPlanner {
             int newTime = time - waitTime - 1;
             int[] newBots = bots.clone();
             int[] newRes = accumulateResources(bots, res, waitTime + 1);
-            newRes = GameUtils.spendResources(newRes, recipe);
+            newRes = Utils.spendResources(newRes, recipe);
             newBots[robotType]++;
 
             for (int i = 0; i < numberOfResources - 1; i++) {
@@ -51,28 +53,5 @@ public class ProductionPlanner {
 
         cache.put(key, best);
         return best;
-    }
-
-    private int computeWaitTime(Recipe recipe, int[] bots, int[] res) {
-        int maxWait = 0;
-        for (Ingredient req : recipe.ingredients()) {
-            int amount = req.amount();
-            int resType = req.resourceType();
-            if (bots[resType] == 0) return -1;
-            int missing = amount - res[resType];
-            if (missing > 0) {
-                int wait = (int) Math.ceil((double) missing / bots[resType]);
-                maxWait = Math.max(maxWait, wait);
-            }
-        }
-        return maxWait;
-    }
-
-    private int[] accumulateResources(int[] bots, int[] res, int duration) {
-        int[] newRes = res.clone();
-        for (int i = 0; i < numberOfResources; i++) {
-            newRes[i] += bots[i] * duration;
-        }
-        return newRes;
     }
 }

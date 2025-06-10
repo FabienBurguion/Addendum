@@ -8,7 +8,7 @@ import java.util.function.BiFunction;
 import java.util.function.IntBinaryOperator;
 
 import static org.epita.Main.numberOfResources;
-import static org.epita.solver.utils.GameUtils.computeMaxSpend;
+import static org.epita.solver.utils.Utils.computeMaxSpend;
 
 @AllArgsConstructor
 public class Solver {
