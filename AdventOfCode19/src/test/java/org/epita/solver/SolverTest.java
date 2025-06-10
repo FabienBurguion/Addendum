@@ -16,25 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SolverTest {
 
-    private static Tuple<int[], Integer> getIntegerTuple(Blueprint blueprint1) throws IOException {
-        Blueprint blueprint2 = new Blueprint(List.of(
-                new RobotProductionCost(List.of(new Material(2, ResourceType.ORE))),
-                new RobotProductionCost(List.of(new Material(3, ResourceType.ORE))),
-                new RobotProductionCost(List.of(
-                        new Material(3, ResourceType.ORE),
-                        new Material(8, ResourceType.CLAY))),
-                new RobotProductionCost(List.of(
-                        new Material(3, ResourceType.ORE),
-                        new Material(12, ResourceType.OBSIDIAN))),
-                new RobotProductionCost(List.of(
-                        new Material(1, ResourceType.GEODE),
-                        new Material(8, ResourceType.CLAY),
-                        new Material(7, ResourceType.OBSIDIAN))
-                )
-        ));
-
-        List<Blueprint> blueprints = List.of(blueprint1, blueprint2);
-
+    private static Tuple<int[], Integer> getIntegerTuple(List<Blueprint> blueprints) throws IOException {
         BiFunction<Integer, Integer, Integer> scoreFn = (i, diamonds) -> (i + 1) * diamonds;
         IntBinaryOperator sum = Integer::sum;
 
@@ -61,7 +43,25 @@ class SolverTest {
                 )
         ));
 
-        Tuple<int[], Integer> result = getIntegerTuple(blueprint1);
+        Blueprint blueprint2 = new Blueprint(List.of(
+                new RobotProductionCost(List.of(new Material(2, ResourceType.ORE))),
+                new RobotProductionCost(List.of(new Material(3, ResourceType.ORE))),
+                new RobotProductionCost(List.of(
+                        new Material(3, ResourceType.ORE),
+                        new Material(8, ResourceType.CLAY))),
+                new RobotProductionCost(List.of(
+                        new Material(3, ResourceType.ORE),
+                        new Material(12, ResourceType.OBSIDIAN))),
+                new RobotProductionCost(List.of(
+                        new Material(1, ResourceType.GEODE),
+                        new Material(8, ResourceType.CLAY),
+                        new Material(7, ResourceType.OBSIDIAN))
+                )
+        ));
+
+        List<Blueprint> blueprints = List.of(blueprint1, blueprint2);
+
+        Tuple<int[], Integer> result = getIntegerTuple(blueprints);
 
         int[] values = result._1();
         int total = result._2();
