@@ -38,7 +38,7 @@ public class BlueprintService {
         int bestBlueprintIndex = findIndexOfMax(values) + 1;
         List<BlueprintOutput> blueprintsRes = new ArrayList<>();
         for (int i = 0; i < values.length; i++) {
-            blueprintsRes.add(new BlueprintOutput(i + 1, values[i]));
+            blueprintsRes.add(new BlueprintOutput(i + 1, values[i] * (i + 1)));
         }
         return new Tuple<>(blueprintsRes, bestBlueprintIndex);
     }
