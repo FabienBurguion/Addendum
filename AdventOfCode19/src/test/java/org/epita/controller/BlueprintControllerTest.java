@@ -1,5 +1,6 @@
 package org.epita.controller;
 
+import org.epita.controller.dto.BlueprintOutput;
 import org.epita.models.Blueprint;
 import org.epita.models.Material;
 import org.epita.models.ResourceType;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.yaml.snakeyaml.util.Tuple;
 
 import java.util.List;
 
@@ -48,7 +50,13 @@ class BlueprintControllerTest {
                 ))
         ));
 
+        List<BlueprintOutput> expectedOutputs = List.of(
+                new BlueprintOutput(1, 2)
+        );
+
         when(blueprintService.getBlueprints()).thenReturn(List.of(dummyBlueprint));
+        when(blueprintService.solve(List.of(dummyBlueprint)))
+                .thenReturn(new Tuple<>(expectedOutputs, 1));
 
         mockMvc.perform(get("/blueprints/analyze").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
