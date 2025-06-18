@@ -30,8 +30,8 @@ public class Solver {
             int[] maxSpend = computeMaxSpend(blueprint);
 
             int[] initialBots = new int[numberODifferentResources];
-            int[] initialResources = new int[numberODifferentResources];
             initialBots[0] = 1;
+            int[] initialResources = new int[numberODifferentResources];
 
             ProductionPlanner planner = new ProductionPlanner();
             int diamonds = planner.planProduction(blueprint, maxSpend, limit, initialBots, initialResources);

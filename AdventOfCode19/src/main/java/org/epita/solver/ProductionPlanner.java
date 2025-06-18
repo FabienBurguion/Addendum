@@ -14,17 +14,17 @@ import static org.epita.utils.Utils.computeWaitTime;
 public class ProductionPlanner {
     private final Map<CacheKey, Integer> cache = new HashMap<>();
 
-    public int planProduction(Blueprint bp, int[] maxSpend, int time, int[] bots, int[] res) {
+    public int planProduction(Blueprint bp, int[] maxSpend, int time, int[] bots, int[] resources) {
         if (time == 0) {
-            return res[getLastResourceType()];
+            return resources[getLastResourceType()];
         }
 
-        CacheKey key = new CacheKey(time, bots, res);
+        CacheKey key = new CacheKey(time, bots, resources);
         if (cache.containsKey(key)) {
             return cache.get(key);
         }
 
-        int best = res[getLastResourceType()] + bots[getLastResourceType()] * time;
+        int best = resources[getLastResourceType()] + bots[getLastResourceType()] * time;
 
         for (int robotType = 0; robotType < bp.size(); robotType++) {
             RobotProductionCost robotProductionCost = bp.getRecipeFor(robotType);
@@ -32,14 +32,14 @@ public class ProductionPlanner {
                 continue;
             }
 
-            int waitTime = computeWaitTime(robotProductionCost, bots, res);
+            int waitTime = computeWaitTime(robotProductionCost, bots, resources);
             if (waitTime < 0 || time - waitTime - 1 <= 0) {
                 continue;
             }
 
             int newTime = time - waitTime - 1;
             int[] newBots = bots.clone();
-            int[] newRes = accumulateResources(bots, res, waitTime + 1);
+            int[] newRes = accumulateResources(bots, resources, waitTime + 1);
             newRes = Utils.spendResources(newRes, robotProductionCost);
             newBots[robotType]++;
 
