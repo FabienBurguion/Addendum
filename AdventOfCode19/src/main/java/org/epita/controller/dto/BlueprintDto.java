@@ -6,6 +6,6 @@ import java.util.List;
 
 @AllArgsConstructor
 public class BlueprintDto {
-    public int bestBlueprint;
+    public Integer bestBlueprint;
     public List<BlueprintOutput> blueprints;
 }
