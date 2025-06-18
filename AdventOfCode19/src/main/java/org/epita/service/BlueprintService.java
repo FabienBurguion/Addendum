@@ -35,11 +35,12 @@ public class BlueprintService {
 
         System.out.println("Total: " + total);
 
-        int bestBlueprintIndex = findIndexOfMax(values) + 1;
         List<BlueprintOutput> blueprintsRes = new ArrayList<>();
         for (int i = 0; i < values.length; i++) {
-            blueprintsRes.add(new BlueprintOutput(i + 1, values[i] * (i + 1)));
+            values[i] = values[i] * (i + 1);
+            blueprintsRes.add(new BlueprintOutput(i + 1, values[i]));
         }
+        int bestBlueprintIndex = findIndexOfMax(values) + 1;
         return new Tuple<>(blueprintsRes, bestBlueprintIndex);
     }
 }
